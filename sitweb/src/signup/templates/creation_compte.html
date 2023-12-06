@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Inscription{% endblock %}
+
+{%block content %}
+{% include 'nav.html' %} 
+<form method="post" action="{% url 'creation_compte' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Créer un compte</button>
+</form>
+{% endblock %}
+ 

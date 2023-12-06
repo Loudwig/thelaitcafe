@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %} </title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            /* background-color: rgba(35, 150, 139, 0.579); */
+            overflow: hidden;
+            padding: 5px 5px;
+            display: flex;
+            align-items: center;
+            
+        }
+
+        .navbar a {
+            float: left;
+            display: flex;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        
+
+        .navbar img {
+            display: block;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            display: block;
+            margin-left: auto;
+        }
+        .underline {
+            height: 1px;
+            background-color: #A0522D;
+        }
+        .navbar-text {
+            margin-left: 10px; /* Ajoutez une marge à gauche pour séparer le texte du logo */
+            color: rgb(5, 5, 5); /* Couleur du texte */
+            font-size: 16px; /* Taille de la police */
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        
+    </footer>
+</body>
+</html>
