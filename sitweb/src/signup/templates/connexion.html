@@ -7,32 +7,55 @@
 
 <style>
     /* Styles pour centrer la boîte du formulaire */
-    
+@font-face {
+    font-family: Hollirood;
+    src: url('static/hollirood.ttf');
+}  
+body{
+    overflow: hidden;
+}  
 .login-container {
     display: flex; 
     flex-direction: column;
     height: 100vh; 
     align-items: center; /* Centrer horizontalement */
     justify-content: flex-start; /* Aligner le contenu en haut de la page */
-    margin-top: 10vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
+    margin-top: 20vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
+    
+    
+
+
 }
 
 form[name="form-container"] {
-    background-color: #f1f1f1;
+    
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: left; /* Aligner le texte à gauche à l'intérieur du formulaire */
-    width: 45vw; /* Utilisez 50% de la largeur de la fenêtre */
+    width: 70vw; /* Utilisez 50% de la largeur de la fenêtre */
     margin: 0 auto;
-    
+    border : 1px solid #fff;
+    background: rgba(180, 180, 180, 0.2); /* Couleur de fond avec transparence */
+    -webkit-backdrop-filter: blur(10px); /* Flou sur le fond */
+    backdrop-filter: blur(10px); /* Flou sur le fond */
+}
+.no_account{
+    text-decoration: None;
+    text-align: center;
+    min-width: 100%;
+    color: black;
+    display: block;
+    margin-top: 10px;
 }
 
 .form-title {
+    font-family: Hollirood;
     text-align: center;
     font-size: 20px; /* Augmenter la taille du texte */
     margin-bottom: 17px;
-    margin-top: 0px; 
+    margin-top: 0px;
+    
 }
 
 input {
@@ -70,7 +93,9 @@ button:hover {
             {{field}}
         </div>
     {% endfor %}
+    
     <button name = "submit" type="submit">Submit</button>
+    <a href="{% url 'creation_compte' %}" class = "no_account">No account ? Signup here</a>
 </form>
 </div>
 {% endblock %}

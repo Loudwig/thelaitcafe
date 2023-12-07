@@ -7,58 +7,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %} </title>
     <style>
+        @font-face {
+            font-family: Hollirood;
+            src: url('static/hollirood.ttf');
+        }    
         body {
             margin: 0;
             font-family: Arial, sans-serif;
         }
-
+        nav{
+            position:sticky;
+            top : 0;
+            z-index: 1;
+        }
         .navbar {
-            /* background-color: rgba(35, 150, 139, 0.579); */
-            overflow: hidden;
-            padding: 5px 5px;
+            background: rgba(255, 255, 255, 0.5); 
+            -webkit-backdrop-filter: blur(10px); 
+            backdrop-filter: blur(3px); /* Flou sur le fond */
+            padding: 10px 10px;
             display: flex;
+            justify-content: center;
             align-items: center;
+            position: -webkit-sticky;
+            top: 0;
             
         }
-
+        .grow1{
+            flex-grow: 1;
+            width : 25%
+        }
         .navbar a {
-            float: left;
-            display: flex;
             color: black;
-            text-align: center;
             text-decoration: none;
-        }
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            
 
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
         }
-        
-
-        .navbar img {
-            display: block;
-            height: 50px;
-            cursor: pointer;
+        .login-btn a{
+            width: fit-content;
         }
-
         .login-btn {
-            display: block;
-            margin-left: auto;
+            display: flex;
+            justify-content: right;
         }
         .underline {
             height: 1px;
-            background-color: #A0522D;
+            background-color:#fff;
+            box-shadow: 0 2px 4px rgba(39, 16, 1, 0.2); /* Box shadow applied to the bottom of the navigation bar */
         }
         .navbar-text {
-            margin-left: 10px; /* Ajoutez une marge à gauche pour séparer le texte du logo */
+            font-family: Hollirood;
             color: rgb(5, 5, 5); /* Couleur du texte */
-            font-size: 16px; /* Taille de la police */
+            font-size: 1.5rem; /* Taille de la police */
+            text-align: center;
         }
+        main{
+            background-image: url('static/bg.jpg.jpeg');
+            
+            background-position: center center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            min-width: 100vw;
+            background-position-y: 0px;
+            background-position-x: -60px;
+            margin: 0;
+            background-size: cover ;
+            
+        }
+        .login img {
+            /* border: 1px solid #f00; */
+            /* background-image: url('static/profile.png'); */
+            width: 32px;
+        }
+        .logout img{
+            /* background-image: url('static/logout.png'); */
+            width : 32px
+        }
+        
+        
+
     </style>
 </head>
 <body>
     
     <main>
+        
         {% block content %}{% endblock %}
     </main>
     <footer>

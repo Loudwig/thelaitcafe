@@ -12,9 +12,13 @@
 </form> -->
 
 <style>
+    @font-face {
+    font-family: Hollirood;
+    src: url('static/hollirood.ttf');
+}    
     /* Ajoutez votre style personnalisé pour le formulaire de création de compte ici */
     body {
-        overflow-y: hidden; /* Désactiver le défilement vertical */
+        overflow: hidden; /* Désactiver le défilement vertical */
     }
     /* Exemple de style : */
     .signup-container {
@@ -23,16 +27,20 @@
     height: 100vh; 
     align-items: center; /* Centrer horizontalement */
     justify-content: flex-start; /* Aligner le contenu en haut de la page */
-    margin-top: 10vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
+    margin-top: 20vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
     }
+
     form[name = "custom-form"]{
-        width: 45vw; /* Ajustez la largeur maximale selon vos préférences */
-        margin: 0 auto;
-        background-color: #f1f1f1;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         text-align: left; /* Aligner le texte à gauche à l'intérieur du formulaire */
+        width: 70vw; /* Utilisez 50% de la largeur de la fenêtre */
+        margin: 0 auto;
+        border : 1px solid #fff;
+        background: rgba(180, 180, 180, 0.2); /* Couleur de fond avec transparence */
+        -webkit-backdrop-filter: blur(10px); /* Flou sur le fond */
+        backdrop-filter: blur(10px); /* Flou sur le fond */
     }
 
     input {
@@ -56,6 +64,7 @@
         background-color: #7B4A12;
     }
     .form-title {
+        font-family: Hollirood;
         text-align: center;
         font-size: 20px; /* Augmenter la taille du texte */
         margin-bottom: 17px;

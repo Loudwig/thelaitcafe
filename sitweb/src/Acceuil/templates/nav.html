@@ -1,19 +1,21 @@
 {% load static %}
 <nav>
     <div class="navbar">
+        <div class = "grow1"></div>
         <a href="{% url 'acceuil' %}">
-            <img src="{% static 'cafe.png' %}" alt="Logo">
+            <span class="navbar-text">Thé'lait'café</span>
         </a>
-        <span class="navbar-text">Thé'lait'café</span>
-        <div class="login-btn">
+        
+        <div class="login-btn grow1">
             {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" style = "margin-right: 10px;">Logout</a>
+            <a href="{% url 'logout' %}"  class="logout"><img src="{% static 'log-out.png'%}" alt="Logout"></a>
             {% else %}
-            <a href="{% url 'connexion' %}" style = "margin-right: 10px;">Login</a>
+            <a href="{% url 'connexion' %}" class = "login"><img src="{% static 'user-2.png'%}" alt="Login"></a>
             {% endif %}
             
-            <a href="{% url 'creation_compte' %}">Signup</a>
+            <!-- <a href="{% url 'creation_compte' %}">Signup</a> -->
         </div>
+
     </div>
     <div class = "underline"></div>
 </nav>
