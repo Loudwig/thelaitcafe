@@ -9,14 +9,14 @@ def index(request):
 
 @login_required
 def shop(request):
-    type_capsule = request.GET.get('type_capsule', 'vertuo')  # par défaut, affiche les produits Vertuo
-    capsules = Capsule.objects.filter(type_capsule=type_capsule)
-    print(capsules)
+    capsules_vertuo = Capsule.objects.filter(type_capsule='vertuo')
+    capsules_classique = Capsule.objects.filter(type_capsule='classique')
+
+    
 
     context = {
-        'capsules': capsules,
-        'type_capsule': type_capsule,
+        'capsules_vertuo': capsules_vertuo,
+        'capsules_classique': capsules_classique
     }
-    for capsule in Capsule.objects.all():
-        print(capsule.image.url)
+    
     return render(request, 'shop/index.html', context)

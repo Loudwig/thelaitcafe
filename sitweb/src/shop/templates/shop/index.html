@@ -8,7 +8,12 @@
 <!--  NAV BAR -->
 
 <style>
-    .capsule-container {
+@font-face {
+    font-family: Hollirood;
+    src: url('static/hollirood.ttf');
+}  
+
+.capsule-container {
     display: flex;
     flex-wrap: wrap;
 }
@@ -62,30 +67,18 @@ button[name = "commander-btn"] {
 button[name = "commander-btn"]:hover{
     background-color: #440a05;
 }
-
-.B1 {
-        display: flex;
-        justify-content: center;
-        margin-top: 5px;
-    }
-
-.B1 a{
-        width: 44%;
-        background: #440a05;
-        border: 1px solid #440a05;
-        cursor: pointer;
-        
-        text-align: center;
-        margin-left: 3%; /* Marge entre les boutons */
-        margin-right: 3%;
-        margin-top: 0px;
-        text-decoration: none;
-        font-size: 15px;
-        color: white;
-        border-radius: 5px;
-    }
-
-
+.capsule-title{
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    font-family: Hollirood;
+    background-color: white;
+    margin-bottom: 0;
+    border-top:1px solid #440a05;
+    border-bottom:1px solid #440a05;
+    padding-top: 1px;
+    
+}
 
 </style>
 
@@ -93,16 +86,38 @@ button[name = "commander-btn"]:hover{
 
 
 <!-- shop.html -->
-<div class="B1" >
-    <a class="test" href="?type_capsule=vertuo">VERTUO</a>
-    <a class ="test" href="?type_capsule=classique">CLASSIQUE</a>
-</div>
+
 
 
 <!-- Afficher les produits -->
-<!-- Afficher les produits -->
+
+<p class=" capsule-title">VERTUO</p>
+
 <div class="capsule-container">
-    {% for capsule in capsules %}
+    {% for capsule in capsules_vertuo %}
+        <div class="capsule">
+            <h3 class="capsule_nom">{{ capsule.nom }}</h3>
+            
+            {% if capsule.image %}
+                <img src="{{ capsule.image.url }}" alt="{{ capsule.nom }}">
+            {% endif %}
+            
+            <div class="infos-capsule">
+                <p class="intensite-capsule">Intensité: {{ capsule.intensite }}</p>
+                <p class="prix-capsules"> 0,{{ capsule.prix_en_centimes }}$ </p>
+            </div>
+            
+            <button name="commander-btn">Commander</button>
+
+            <!-- Ajoutez d'autres détails si nécessaire -->
+        </div>
+    {% endfor %}
+</div>
+<p class=" capsule-title">CLASSIQUE</p>
+<div class="capsule-container">
+    
+
+    {% for capsule in capsules_classique %}
         <div class="capsule">
             <h3 class="capsule_nom">{{ capsule.nom }}</h3>
             
