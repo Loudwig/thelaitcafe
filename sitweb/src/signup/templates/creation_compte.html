@@ -70,6 +70,14 @@
         margin-bottom: 17px;
         margin-top: 0px; 
     }
+    .have-account{
+    text-decoration: None;
+    text-align: center;
+    min-width: 100%;
+    color: black;
+    display: block;
+    margin-top: 10px;
+}
 </style>
 <div class = "signup-container">
 <form method="post" action="{% url 'creation_compte' %}" name="custom-form">
@@ -83,6 +91,8 @@
     {% endfor %}
     
     <button type="submit">Créer un compte</button>
+    <a href="{% url 'connexion' %}" class = "have-account">Already have an account ?<br>Signin here</a>
+
 </form>
 </div>
 {% endblock %}

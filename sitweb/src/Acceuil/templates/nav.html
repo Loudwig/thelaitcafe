@@ -8,9 +8,9 @@
         
         <div class="login-btn grow1">
             {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}"  class="logout"><img src="{% static 'log-out.png'%}" alt="Logout"></a>
+            <a href="{% url 'logout' %}"  class="logout"><img src="{% static 'logout.png'%}" alt="Logout"></a>
             {% else %}
-            <a href="{% url 'connexion' %}" class = "login"><img src="{% static 'user-2.png'%}" alt="Login"></a>
+            <a href="{% url 'connexion' %}" class = "login"><img src="{% static 'account.png'%}" alt="Login"></a>
             {% endif %}
             
             <!-- <a href="{% url 'creation_compte' %}">Signup</a> -->
