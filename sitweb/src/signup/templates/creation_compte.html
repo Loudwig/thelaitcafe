@@ -5,10 +5,77 @@
 
 {%block content %}
 {% include 'nav.html' %} 
-<form method="post" action="{% url 'creation_compte' %}">
+<!-- <form method="post" action="{% url 'creation_compte' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Créer un compte</button>
+</form> -->
+
+<style>
+    /* Ajoutez votre style personnalisé pour le formulaire de création de compte ici */
+    body {
+        overflow-y: hidden; /* Désactiver le défilement vertical */
+    }
+    /* Exemple de style : */
+    .signup-container {
+    display: flex; 
+    flex-direction: column;
+    height: 100vh; 
+    align-items: center; /* Centrer horizontalement */
+    justify-content: flex-start; /* Aligner le contenu en haut de la page */
+    margin-top: 10vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
+    }
+    form[name = "custom-form"]{
+        width: 45vw; /* Ajustez la largeur maximale selon vos préférences */
+        margin: 0 auto;
+        background-color: #f1f1f1;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: left; /* Aligner le texte à gauche à l'intérieur du formulaire */
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #A0522D;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color: #7B4A12;
+    }
+    .form-title {
+        text-align: center;
+        font-size: 20px; /* Augmenter la taille du texte */
+        margin-bottom: 17px;
+        margin-top: 0px; 
+    }
+</style>
+<div class = "signup-container">
+<form method="post" action="{% url 'creation_compte' %}" name="custom-form">
+    {% csrf_token %}
+    <p class = "form-title">Signup</p>
+    {% for field in form %}
+        <div class="form-field">
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+    {% endfor %}
+    
+    <button type="submit">Créer un compte</button>
 </form>
+</div>
 {% endblock %}
+
  
