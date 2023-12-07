@@ -1,3 +1,30 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
-# Create your models here.
+def upload_to(instance, filename):
+    return f'capsule_images/{instance.nom}/{filename}'
+
+class Capsule(models.Model):
+    TYPE_CAPSULE_CHOICES = [
+        ('vertuo', 'Vertuo'),
+        ('classique', 'Classique'),
+    ]
+
+    TYPE_CAFEINE_CHOICES = [
+        ('cafeine', 'Caféiné'),
+        ('decafeine', 'Décaféiné'),
+    ]
+
+    nom = models.CharField(max_length=255)
+    prix_en_centimes = models.IntegerField(
+        default=0,
+        validators=[MinValueValidator(50, message='Le prix doit être d\'au moins 50 centimes.'), MaxValueValidator(100, message='Le prix doit être d\'au plus 1 euro.')]
+    )
+    intensite = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(12)])
+    type_capsule = models.CharField(max_length=10, choices=TYPE_CAPSULE_CHOICES)
+    type_cafeine = models.CharField(max_length=10, choices=TYPE_CAFEINE_CHOICES)
+    image = models.ImageField(upload_to=upload_to, null=True, blank=True)
+
+    def __str__(self):
+        return self.nom
+

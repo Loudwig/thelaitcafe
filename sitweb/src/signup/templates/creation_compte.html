@@ -1,33 +1,32 @@
-
 {% extends 'base.html' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Signup{% endblock %}
 
 {%block content %}
-{% include 'nav.html' %} 
-<!-- <form method="post" action="{% url 'creation_compte' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Créer un compte</button>
-</form> -->
 
+<!-- NAV BAR -->
+{% include 'nav.html' %}
+<!-- END NAV BAR -->
+
+<!-- CSS CREATION COMPTE -->
 <style>
     @font-face {
     font-family: Hollirood;
     src: url('static/hollirood.ttf');
-}    
-    /* Ajoutez votre style personnalisé pour le formulaire de création de compte ici */
+    }    
+    /* NO SCROLLING */
     body {
         overflow: hidden; /* Désactiver le défilement vertical */
     }
-    /* Exemple de style : */
+
+   
     .signup-container {
     display: flex; 
     flex-direction: column;
     height: 100vh; 
     align-items: center; /* Centrer horizontalement */
     justify-content: flex-start; /* Aligner le contenu en haut de la page */
-    margin-top: 20vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
+    margin-top: 16vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
     }
 
     form[name = "custom-form"]{
@@ -77,24 +76,28 @@
     color: black;
     display: block;
     margin-top: 10px;
-}
+    }
 </style>
-<div class = "signup-container">
-<form method="post" action="{% url 'creation_compte' %}" name="custom-form">
-    {% csrf_token %}
-    <p class = "form-title">Signup</p>
-    {% for field in form %}
-        <div class="form-field">
-            {{ field.label_tag }}
-            {{ field }}
-        </div>
-    {% endfor %}
-    
-    <button type="submit">Créer un compte</button>
-    <a href="{% url 'connexion' %}" class = "have-account">Already have an account ?<br>Signin here</a>
+<!-- END CSS CREATION COMPTE -->
 
-</form>
+<!-- HTML FORMULAIRE DE CREATION COMPTE -->
+<div class = "signup-container">
+    <form method="post" action="{% url 'creation_compte' %}" name="custom-form">
+        {% csrf_token %}
+        <p class = "form-title">Signup</p>
+        {% for field in form %}
+            <div class="form-field">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+        
+        <button type="submit">Créer un compte</button>
+        <a href="{% url 'connexion' %}" class = "have-account">Already have an account ?<br>Signin here</a>
+    </form>
 </div>
+<!-- FIN FORUMULAIRE DE CREATION COMPTE -->
+
 {% endblock %}
 
  

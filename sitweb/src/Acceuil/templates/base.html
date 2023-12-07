@@ -6,66 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %} </title>
+    
+    <!-- CSS BASE (FOND D'ECRAN) -->
     <style>
-        @font-face {
-            font-family: Hollirood;
-            src: url('static/hollirood.ttf');
-        }    
+        
         body {
             margin: 0;
             font-family: Arial, sans-serif;
         }
-        nav{
-            position:sticky;
-            top : 0;
-            z-index: 1;
-        }
-        .navbar {
-            background: rgba(255, 255, 255, 0.5); 
-            -webkit-backdrop-filter: blur(10px); 
-            backdrop-filter: blur(3px); /* Flou sur le fond */
-            padding: 10px 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: -webkit-sticky;
-            top: 0;
-            
-        }
-        .grow1{
-            flex-grow: 1;
-            width : 25%
-        }
-        .navbar a {
-            color: black;
-            text-decoration: none;
-            width: 50%;
-            display: flex;
-            justify-content: center;
-            
-
-        }
-        .login-btn a{
-            width: fit-content;
-        }
-        .login-btn {
-            display: flex;
-            justify-content: right;
-        }
-        .underline {
-            height: 1px;
-            background-color:#fff;
-            box-shadow: 0 2px 4px rgba(39, 16, 1, 0.2); /* Box shadow applied to the bottom of the navigation bar */
-        }
-        .navbar-text {
-            font-family: Hollirood;
-            color: rgb(5, 5, 5); /* Couleur du texte */
-            font-size: 1.5rem; /* Taille de la police */
-            text-align: center;
-        }
+        
         main{
             background-image: url('static/coffe.png');
-            
             background-position: center center;
             background-repeat: no-repeat;
             min-height: 100vh;
@@ -74,26 +25,14 @@
             background-position-x: 0px;
             margin: 0;
             background-size: cover ;
-            
-        }
-        .login img {
-            /* border: 1px solid #f00; */
-            /* background-image: url('static/profile.png'); */
-            width: 32px;
-        }
-        .logout img{
-            /* background-image: url('static/logout.png'); */
-            width : 32px
         }
         
-        
-
     </style>
+    <!-- FIN CSS BASE -->
+
 </head>
 <body>
-    
     <main>
-        
         {% block content %}{% endblock %}
     </main>
     <footer>

@@ -3,32 +3,35 @@
 {% block title %}Connexion{% endblock %}
 
 {%block content %}
-{% include 'nav.html' %} 
 
+<!-- NAV BAR -->
+{% include 'nav.html' %} 
+<!-- END NAV-BAR -->
+
+<!-- CSS CONNEXION  -->
 <style>
-    /* Styles pour centrer la boîte du formulaire */
+    /* Style de la page de connexion */
 @font-face {
     font-family: Hollirood;
     src: url('static/hollirood.ttf');
 }  
+
+/* NO-SCROLLING */
 body{
     overflow: hidden;
 }  
+
+
 .login-container {
     display: flex; 
     flex-direction: column;
     height: 100vh; 
     align-items: center; /* Centrer horizontalement */
     justify-content: flex-start; /* Aligner le contenu en haut de la page */
-    margin-top: 20vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
-    
-    
-
-
+    margin-top: 20vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */   
 }
 
 form[name="form-container"] {
-    
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -37,16 +40,8 @@ form[name="form-container"] {
     margin: 0 auto;
     border : 1px solid #fff;
     background: rgba(180, 180, 180, 0.2); /* Couleur de fond avec transparence */
-    -webkit-backdrop-filter: blur(10px); /* Flou sur le fond */
+    -webkit-backdrop-filter: blur(10px); /* Flou sur le fond pour safari*/
     backdrop-filter: blur(10px); /* Flou sur le fond */
-}
-.no_account{
-    text-decoration: None;
-    text-align: center;
-    min-width: 100%;
-    color: black;
-    display: block;
-    margin-top: 10px;
 }
 
 .form-title {
@@ -66,7 +61,7 @@ input {
 }
 
 button {
-    background-color: #A0522D;
+    background-color: #924824;
     color: white;
     padding: 10px;
     border: none;
@@ -76,27 +71,35 @@ button {
 }
 
 button:hover {
-    background-color: #7B4A12;
+    background-color: #440a05;
 }
-    
+.no_account{
+    text-decoration: None;
+    text-align: center;
+    min-width: 100%;
+    color: black;
+    display: block;
+    margin-top: 10px;
+}    
 </style>
+<!-- END-CSS CONNEXION-->
 
-
-
+<!-- HTML CONNEXION -->
 <div class="login-container">
-<form method="post" action="{% url 'connexion' %}" name="form-container">
-    <p class = "form-title">Connexion</p>
-    {% csrf_token %}
-    {% for field in form%}
-        <div class="form-field">
-            {{field.label_tag}}
-            {{field}}
-        </div>
-    {% endfor %}
-    
-    <button name = "submit" type="submit">Submit</button>
-    <a href="{% url 'creation_compte' %}" class = "no_account">No account ? Signup here</a>
-</form>
+    <form method="post" action="{% url 'connexion' %}" name="form-container">
+        <p class = "form-title">Connexion</p>
+        {% csrf_token %}
+        {% for field in form%}
+            <div class="form-field">
+                {{field.label_tag}}
+                {{field}}
+            </div>
+        {% endfor %}
+        
+        <button name = "submit" type="submit">Submit</button>
+        <a href="{% url 'creation_compte' %}" class = "no_account">No account ? Signup here</a>
+    </form>
 </div>
+<!-- HTML CONNEXION -->
 {% endblock %}
     
