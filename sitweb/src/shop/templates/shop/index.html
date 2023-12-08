@@ -7,6 +7,7 @@
 {% include 'nav.html' %} 
 <!--  NAV BAR -->
 
+<!-- CSS SHOP INDEX -->
 <style>
 @font-face {
     font-family: Hollirood;
@@ -68,7 +69,7 @@ button[name = "commander-btn"]:hover{
     background-color: #440a05;
 }
 .capsule-title{
-    font-size: 20px;
+    font-size: 18px;
     color: black;
     text-align: center;
     font-family: Hollirood;
@@ -81,18 +82,15 @@ button[name = "commander-btn"]:hover{
 }
 
 </style>
+<!-- FIN CSS SHOP INDEX -->
 
 
 
 
-<!-- shop.html -->
 
 
-
-<!-- Afficher les produits -->
-
+<!-- CAPSULES VERTUOS -->
 <p class=" capsule-title">VERTUO</p>
-
 <div class="capsule-container">
     {% for capsule in capsules_vertuo %}
         <div class="capsule">
@@ -113,6 +111,9 @@ button[name = "commander-btn"]:hover{
         </div>
     {% endfor %}
 </div>
+<!-- FIN CAPSULES VERTUOS -->
+
+<!-- CAPSULES CLASSIQUES -->
 <p class=" capsule-title">CLASSIQUE</p>
 <div class="capsule-container">
     
@@ -136,6 +137,7 @@ button[name = "commander-btn"]:hover{
         </div>
     {% endfor %}
 </div>
+<!-- FIN CAPSULES CLASSIQUES -->
 
 
 {% endblock %}
