@@ -24,6 +24,8 @@ class Capsule(models.Model):
     type_capsule = models.CharField(max_length=10, choices=TYPE_CAPSULE_CHOICES)
     type_cafeine = models.CharField(max_length=10, choices=TYPE_CAFEINE_CHOICES)
     image = models.ImageField(upload_to=upload_to, null=True, blank=True)
+    stock = models.PositiveIntegerField(default=0)  # Ajout du champ de stock
+
 
     def __str__(self):
         return self.nom

@@ -24,9 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Acceuil.urls')),
     path('', include('signup.urls')),
-    path('boutique',include('shop.urls'))
+    path('boutique/',include('shop.urls'))
 
 ]
 
+# ajoute l'url de l'image qui était dans la base de donées
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

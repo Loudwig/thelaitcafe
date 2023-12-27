@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Capsule
+
+DEBUG = True
+
 # Create your views here.
 
 @login_required
@@ -9,10 +12,8 @@ def index(request):
 
 @login_required
 def shop(request):
-    capsules_vertuo = Capsule.objects.filter(type_capsule='vertuo')
+    capsules_vertuo = Capsule.objects.filter(type_capsule='vertuo',stock__gt = 0)
     capsules_classique = Capsule.objects.filter(type_capsule='classique')
-
-    
 
     context = {
         'capsules_vertuo': capsules_vertuo,
@@ -20,3 +21,4 @@ def shop(request):
     }
     
     return render(request, 'shop/index.html', context)
+
