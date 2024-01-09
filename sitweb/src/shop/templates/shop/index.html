@@ -3,9 +3,11 @@
 {% block title %}Boutique{% endblock %}
 
 {% block content %}
+
+
 <!-- NAV BAR -->
 {% include 'nav.html' %} 
-<!--  NAV BAR -->
+<!--  FIN NAV BAR -->
 
 <!-- CSS SHOP INDEX -->
 <style>
@@ -54,7 +56,7 @@
 .infos-capsule p {
         margin: auto;
     }
-button[name = "commander-btn"] {
+button[class = "commander-btn"] {
         background-color: #924824;
         color: #fff;
         padding: 10px;
@@ -65,7 +67,7 @@ button[name = "commander-btn"] {
         width: 80%;
         
     }
-button[name = "commander-btn"]:hover{
+button[class = "commander-btn"]:hover{
     background-color: #440a05;
 }
 .capsule-title{
@@ -85,33 +87,30 @@ button[name = "commander-btn"]:hover{
 <!-- FIN CSS SHOP INDEX -->
 
 
-
-
-
-
 <!-- CAPSULES VERTUOS -->
-<p class=" capsule-title">VERTUO</p>
+<p class="capsule-title">VERTUO</p>
 <div class="capsule-container">
     {% for capsule in capsules_vertuo %}
         <div class="capsule">
             <h3 class="capsule_nom">{{ capsule.nom }}</h3>
-            
+
             {% if capsule.image %}
                 <img src="{{ capsule.image.url }}" alt="{{ capsule.nom }}">
             {% endif %}
-            
+
             <div class="infos-capsule">
                 <p class="intensite-capsule">Intensité: {{ capsule.intensite }}</p>
                 <p class="prix-capsules"> 0,{{ capsule.prix_en_centimes }}$ </p>
             </div>
-            
-            <button name="commander-btn">Commander</button>
 
-            <!-- Ajoutez d'autres détails si nécessaire -->
+            <button class="commander-btn" onclick="commander('{{ capsule.nom }}', '{{ capsule.prix_en_centimes }}')">Commander</button>
         </div>
     {% endfor %}
 </div>
+
 <!-- FIN CAPSULES VERTUOS -->
+
+
 
 <!-- CAPSULES CLASSIQUES -->
 <p class=" capsule-title">CLASSIQUE</p>
@@ -131,14 +130,62 @@ button[name = "commander-btn"]:hover{
                 <p class="prix-capsules"> 0,{{ capsule.prix_en_centimes }}$ </p>
             </div>
             
-            <button name="commander-btn">Commander</button>
+            <button class="commander-btn" onclick="commander('{{ capsule.nom }}', '{{ capsule.prix_en_centimes }}')">Commander</button>
 
             <!-- Ajoutez d'autres détails si nécessaire -->
         </div>
     {% endfor %}
 </div>
+
 <!-- FIN CAPSULES CLASSIQUES -->
 
+<!-- SCRIPT JS COMMANDER CAPSULE -->
+<script>
+    function commander(capsuleNom, capsulePrix) {
+        // Get the CSRF token from the cookie
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Search for the CSRF token cookie
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Make an AJAX request to the the view that deal with orders
+        $.ajax({
+            type: "POST",
+            url: '/boutique/order_capsule',
+            headers: {
+                 'X-CSRFToken': getCookie('csrftoken')  // Include the CSRF token in the headers
+            },
+            data: {
+                capsule_nom: capsuleNom,
+                capsule_prix: capsulePrix,
+                account_num: "+33600000005"
+            },
+            success: function(response) {
+                // Redirect to the Lydia URL to pay
+                if (response.success){
+                    window.location.href = response.redirect;
+                } else {
+                    console.log(response.message);
+                }
+            },
+            error: function(error) {
+                console.error("Error:", error);
+            }
+        });
+    }
+</script>
+<!-- FIN JS COMMANDER CAPSULE -->
 
 {% endblock %}
     
