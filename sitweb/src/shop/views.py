@@ -1,17 +1,15 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Capsule
+from .models import Capsule,Transaction
 from django.http import JsonResponse,HttpResponseNotAllowed
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 import requests
 
+transactionWaiting = [] # il faut créer un log sinon à chaque fois que l'on relance cela pert l'historique des transactions
+#   a chaque fois que cela se lance il faut récupérer l'historique des dernières transactions
 DEBUG = False
 
-# Create your views here.
-
-@login_required
-def index(request):
-    return render(request,'shop/index.html')
+# Create your views here
 
 @login_required
 def shop(request):
@@ -34,15 +32,15 @@ def order_capsule(request):
         vendor_token = '632b3978223b2045410032'
         url = "https://homologation.lydia-app.com/api/request/do.json"
 
-        capsule_amount = request.POST.get('capsule_prix')  # Assuming you send the capsule_id in the POST request
+        capsule_amount = request.POST.get('capsule_prix')  
         account_num = request.POST.get('account_num')
+        capsule_name = request.POST.get('capsule_nom')
 
-        # Modify the data dictionary with dynamic values based on the capsule_id or any other relevant information
         data = {
-            "amount": int(capsule_amount)/100,
+            "amount": int(capsule_amount)/100, #vérifier ce truc
             "payment_method": "auto",
             "vendor_token": vendor_token,
-            "recipient": account_num,
+            "recipient": account_num, # account_num à récupérer dans l'utilisateur
             "currency": "EUR",
             "type": "phone",
             
@@ -50,8 +48,13 @@ def order_capsule(request):
 
         response = requests.post(url, data=data)
         if response.status_code == 200 : 
-            
             transaction_data = response.json()
+            
+            # Créer une transation en cours 
+            current_user = request.user
+            capsule = Capsule.objects.get(nom=capsule_name)  # Remplacez 'nom_capsule' par le nom de la capsule réelle
+            new_transaction = Transaction.objects.create(request_id = transaction_data["request_id"],author=current_user, contenu=capsule)
+            
             redirect_url = transaction_data['mobile_url']
             
             if DEBUG : print(f"transaction data : {transaction_data}")
@@ -63,3 +66,5 @@ def order_capsule(request):
     else:
         allowed_methods = ['POST']
         return HttpResponseNotAllowed(allowed_methods)
+
+

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index,shop,order_capsule
+from .views import shop,order_capsule
 
 
 urlpatterns = [
