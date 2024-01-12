@@ -55,9 +55,6 @@ def stockUp(t):
         return False
 
 
-
-
-
 while True : 
     transactionWaiting = Transaction.objects.filter(status=0).all()
     
@@ -96,14 +93,16 @@ while True :
             
             elif isPaid(transaction.request_id) == -1 : 
                 print(f'La transaction {transaction.request_id} a un status inconnu')
-        else : 
-            
+        
+        else :  
             data = {
                 "request_id" : transaction.request_id,
                 "vendor_token": vendortoken
             }
             cancel = requests.post(url = cancel_url, data = data)
-            
+            print(f'La transaction {transaction.request_id} a été cancelled')
+            transaction.status = 6
+            transaction.save()
             print(cancel.json())
 
     sleep(TIME_DELAY)
