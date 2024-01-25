@@ -40,3 +40,12 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.request_id
+
+    def data(self):
+        donne = {
+            'request_id' : self.request_id ,
+            'author' : str(self.author),
+            'contenu' : str(self.contenu),
+            'status' : self.status
+        }
+        return donne

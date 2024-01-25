@@ -1,15 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Capsule,Transaction
-from django.http import JsonResponse,HttpResponseNotAllowed
+from django.http import JsonResponse,HttpResponseNotAllowed, HttpResponse
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 import requests
+import json
 
-transactionWaiting = [] # il faut créer un log sinon à chaque fois que l'on relance cela pert l'historique des transactions
-#   a chaque fois que cela se lance il faut récupérer l'historique des dernières transactions
 DEBUG = False
-
-# Create your views here
+API_KEY = '12'
 
 @login_required
 def shop(request):
@@ -68,3 +66,55 @@ def order_capsule(request):
         return HttpResponseNotAllowed(allowed_methods)
 
 
+
+# The arduino request this view to get the transaction that havec been paid
+@csrf_exempt
+def getTransaction(request):
+    api_key = request.headers.get('Authorization', '').split('Bearer ')[-1]
+    
+    if api_key != API_KEY:
+        return JsonResponse({'error': 'Clé d\'authentification invalide'}, status=401)
+
+    if request.method == 'POST': 
+        transac = Transaction.objects.filter(status=1)
+        transac_list = [ transaction.data() for transaction in transac]
+        return JsonResponse({'transactions': transac_list})
+    
+    else : 
+        if DEBUG : 
+            transac = Transaction.objects.filter(status=1)
+            transac_list = [ transaction.data() for transaction in transac]
+            context = {'transactions': transac_list}
+            return render(request,'shop/getTransaction.html',context)
+        else : 
+            allowed_methods = ['POST']
+            return HttpResponseNotAllowed(allowed_methods)
+
+
+
+# When a transaction as been treated by the arduino they recieve code 300
+# It prevents that the arduino retreat them
+@csrf_exempt
+def update(request):
+    
+    # -----------SECURITY----------
+    api_key = request.headers.get('Authorization', '').split('Bearer ')[-1]
+    
+    if api_key != API_KEY:
+        return JsonResponse({'error': 'Clé d\'authentification invalide'}, status=401)
+    # ----------SECURITY------------
+
+    if request.method == 'POST' : 
+        data = json.loads(request.body.decode('utf-8'))
+        response = data.get("request_id")
+
+        transToUpdate = Transaction.objects.filter(request_id = response)
+        
+        for trans in transToUpdate:
+            trans.status = 300 
+            trans.save()
+            if  DEBUG : print(f'transaction {trans.request_id} is updated')
+        
+        return JsonResponse({'success': True})
+
+        

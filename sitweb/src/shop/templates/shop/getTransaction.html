@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Liste des Transactions</title>
+</head>
+<body>
+    <h1>Liste des Transactions payés non vendus</h1>
+
+    {% if transactions %}
+        <ul>
+            {% for transaction in transactions %}
+                <li>{{transaction}}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune transaction trouvée.</p>
+    {% endif %}
+</body>
+</html>
