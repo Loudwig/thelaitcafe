@@ -40,8 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Acceuil',
     'signup',
-    'shop'
+    'shop',
+    'api',
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,3 +135,5 @@ LOGOUT_REDIRECT_URL = 'connexion'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
