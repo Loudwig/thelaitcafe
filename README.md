@@ -20,6 +20,7 @@ Point à rajouter :
   - Mettre en production le site web sur une machine virtuelle.
   - Rajouter un système qui permet aux étudiants d'avoir des capsules gratuites après un certain nombre d'achats.
   - Lié la partie arduino et le script detectpayment
+  - Lors de la création d'un compte afficher ce qui ne va pas lorsque le mdp n'est pas bon
     
     
 
