@@ -1,15 +1,21 @@
 import requests
+import os
 
 url_login = 'http://127.0.0.1:8000/api/login'
 url_transaction = 'http://127.0.0.1:8000/api/getTransaction'
-url_update = 'http://127.0.0.1:8000/api/getTransaction'
+url_update = 'http://127.0.0.1:8000/api/update'
 
-username = "ROMAIN"
-password = "ROMAIN"
+try:
+    username = os.environ["USERNAME"]
+except KeyError as e:
+    raise RuntimeError("Could not find a USERNAME in environment") from e
+try:
+    password = os.environ["PASSWORD"]
+except KeyError as e1:
+    raise RuntimeError("Could not find a PASSWORD in environment") from e1
 
 def api_connect():
-    s = requests.Session() # Création d'une session pour avoir être connecté en temps que superuser
-    # il faut cacher les username et password.... envoyé le hash ? je sais pas trop...
+    s = requests.Session() #
     response = s.post(url_login,data={ "username" : username, "password" : password})
 
     if response.status_code == 200: 
@@ -23,9 +29,6 @@ def api_connect():
 
 
 api_connect()
-
-
-
 
 
 

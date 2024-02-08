@@ -34,8 +34,8 @@ def api_login(request):
             login(request, user)
             return JsonResponse({'message': 'Login successful'})
         else:
-            response_data = {'error': 'Invalid credentials'}
-            return HttpResponse(json.dumps(response_data), status=401, content_type='application/json')
+            return JsonResponse({'error': 'Authentication failure'}, status=401)
+
 
     return HttpResponse('Method Not Allowed', status=405)
 

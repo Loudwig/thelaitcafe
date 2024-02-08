@@ -21,7 +21,10 @@ print(os.path.join(BASE_DIR,'boutique/templates'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j6n**dzo#j0+tw-ggzb3#a4*q5y*tr%o7#y05#9)4w@h0v35#n'
+try:
+    SECRET_KEY = os.environ["SECRET_KEY"]
+except KeyError as e:
+    raise RuntimeError("Could not find a SECRET_KEY in environment") from e
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

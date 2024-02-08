@@ -19,7 +19,7 @@ DEBUG = True
 TIME_DELAY = 5
 
 
-def isPaid(id):
+def stateTransaction(id):
     # data pour la requête
     data = {
     "request_id": id,
@@ -69,7 +69,7 @@ while True :
                 print(transaction)
                 print(f"stock is up for transaction {transaction.request_id}")
 
-            if isPaid(transaction.request_id) == 1 : 
+            if stateTransaction(transaction.request_id) == 1 : 
                 print(f"La transaction {transaction.request_id} a été PAYÉ")
                 transaction.status = 1 # passe le statut de la transaction en transaction payé
                 
@@ -78,20 +78,20 @@ while True :
                 transaction.save()
                 
 
-            elif isPaid(transaction.request_id) == 0 : 
+            elif stateTransaction(transaction.request_id) == 0 : 
                 print(f'La transaction {transaction.request_id} est EN COURS')
 
-            elif isPaid(transaction.request_id) == 5 : 
+            elif stateTransaction(transaction.request_id) == 5 : 
                 print(f"La transaction {transaction.request_id} a été refusé par l'utilisateur")
                 transaction.status = 5
                 transaction.save()
 
-            elif isPaid(transaction.request_id) == 6 : 
+            elif stateTransaction(transaction.request_id) == 6 : 
                 print(f'La transaction {transaction.request_id} a été cancelled')
                 transaction.status = 6
                 transaction.save()
             
-            elif isPaid(transaction.request_id) == -1 : 
+            elif stateTransaction(transaction.request_id) == -1 : 
                 print(f'La transaction {transaction.request_id} a un status inconnu')
         
         else :  
