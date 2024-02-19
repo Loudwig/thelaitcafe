@@ -37,6 +37,8 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+source ~/.TLC_ENV_VARIABLES
+
 VIRTUAL_ENV="/Users/romain/Documents/info/projects/thelait-cafe/sitweb/.env"
 export VIRTUAL_ENV
 
