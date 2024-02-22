@@ -127,7 +127,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = "/var/www/thelaitcafe.com/static"
+STATICFILES_DIRS = [BASE_DIR/"static"]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -137,6 +138,7 @@ LOGIN_URL = 'connexion'
 LOGOUT_REDIRECT_URL = 'connexion'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = '/var/www/thelaitcafe.com/media'
+
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
