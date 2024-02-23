@@ -31,6 +31,14 @@ DEBUG = False
 
 ALLOWED_HOSTS = [".thelaitcafe.com"]
 
+# HSTS
+SECURE_HSTS_SECONDS = 30  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+#REFERRER-POLICIY HEADER
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
 # Application definition
 
@@ -59,6 +67,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# AGAINST XSS
+MIDDLEWARE += ["csp.middleware.CSPMiddleware"]
+
+CSP_SCRIPT_SRC = ["'self'","https://code.jquery.com"]
+CSP_STYLE_SRC =["'self'","'unsafe-inline'"]
+CSP_IMG_SRC = ["'self'"]
 
 ROOT_URLCONF = 'boutique.urls'
 
