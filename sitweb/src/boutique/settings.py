@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(os.path.join(BASE_DIR,'boutique/templates'))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -27,15 +27,9 @@ except KeyError as e:
     raise RuntimeError("Could not find a SECRET_KEY in environment") from e
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [".thelaitcafe.com"]
-
-# HSTS
-SECURE_HSTS_SECONDS = 30  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
-SECURE_HSTS_PRELOAD = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+ALLOWED_HOSTS = []
 
 #REFERRER-POLICIY HEADER
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
@@ -71,7 +65,7 @@ MIDDLEWARE = [
 # AGAINST XSS
 MIDDLEWARE += ["csp.middleware.CSPMiddleware"]
 
-CSP_SCRIPT_SRC = ["'self'","https://code.jquery.com"]
+CSP_SCRIPT_SRC = ["'self'","https://code.jquery.com","'unsafe-inline'"]
 CSP_STYLE_SRC =["'self'","'unsafe-inline'"]
 CSP_IMG_SRC = ["'self'"]
 
@@ -142,8 +136,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = "/var/www/thelaitcafe.com/static"
-STATICFILES_DIRS = [BASE_DIR/"static"]
+STATICFILES_DIRS = [BASE_DIR/'static']
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -153,7 +147,7 @@ LOGIN_URL = 'connexion'
 LOGOUT_REDIRECT_URL = 'connexion'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/var/www/thelaitcafe.com/media'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
