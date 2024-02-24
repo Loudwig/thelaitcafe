@@ -29,7 +29,14 @@ Problème de cyber-sécurité :
 Cependant je n'arrive pas encore à vérifier la signature. Cela pose donc un problème de sécurité. En effet je penses que si quelqu'un arrive à écouter les requêtes que ma machine virtuelle fait, il pourra simuler un transaction payé.
 
 
-POUR TESTER LE PROJET : 
+POUR TESTER LE PROJET EN LOCAL:
+
+Créer un environnement virtuel
+Installer les dépendances du fichier requirements_dev.txt
+
+VARIABLES D'ENVIRONNEMENT à CRÉER ET SOURCER : 
+SECRET_KEY = "sakdfha;sdfjha;sldnf;askdfjalskjdf;aksjdf" # a long private string
+PRODUCTION = 'false' # 
 
 1 - Lancer l'app django : python manage.py runserver (src/)
 2 - Aller sur la boutique de l'app
