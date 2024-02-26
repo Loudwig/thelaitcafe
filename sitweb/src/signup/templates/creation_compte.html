@@ -16,7 +16,7 @@
     }    
     /* NO SCROLLING */
     body {
-        overflow: hidden; /* Désactiver le défilement vertical */
+        overflow: auto; /* Désactiver le défilement vertical */
     }
 
    
@@ -26,7 +26,7 @@
     height: 100vh; 
     align-items: center; /* Centrer horizontalement */
     justify-content: flex-start; /* Aligner le contenu en haut de la page */
-    margin-top: 16vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
+    margin-top: 10vh; /* Ajouter une marge supérieure de 10vh (ajustez selon vos besoins) */
     }
 
     form[name = "custom-form"]{
@@ -77,25 +77,47 @@
     display: block;
     margin-top: 10px;
     }
+    .error {
+        display: flex; /* Utilisez la flexbox pour aligner le contenu horizontalement */
+        flex-direction: column; /* Arrangez les éléments en colonne */
+    }
+    .error-message {
+        margin-bottom: 2px;
+        font-size: small;
+        color :rgb(190, 15, 6) ; 
+        font-weight :bold;
+        text-align: center;
+        width : 100% ;
+    }
 </style>
 <!-- END CSS CREATION COMPTE -->
 
 <!-- HTML FORMULAIRE DE CREATION COMPTE -->
-<div class = "signup-container">
+<div class="signup-container">
     <form method="post" action="{% url 'creation_compte' %}" name="custom-form">
         {% csrf_token %}
-        <p class = "form-title">Signup</p>
+        <p class="form-title">Signup</p>
         {% for field in form %}
-            <div class="form-field">
+            <div class="form-field{% if field.errors %} error{% endif %}">
                 {{ field.label_tag }}
                 {{ field }}
+                {% if field.errors %}
+                    <span class="error-message">
+                        {% for error in field.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </span>
+                {% endif %}
             </div>
         {% endfor %}
-        
+
         <button type="submit">Créer un compte</button>
-        <a href="{% url 'connexion' %}" class = "have-account">Already have an account ?<br>Signin here</a>
+        <a href="{% url 'connexion' %}" class="have-account"><u>Already have an account ?</u><br><u>Signin here</u></a>
     </form>
 </div>
+
+
+
 <!-- FIN FORUMULAIRE DE CREATION COMPTE -->
 
 {% endblock %}

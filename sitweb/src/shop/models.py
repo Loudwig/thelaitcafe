@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.contrib.auth.models import User
+from signup.models import CustomUser
 
 
 def upload_to(instance, filename):
@@ -34,7 +34,7 @@ class Capsule(models.Model):
 
 class Transaction(models.Model):
     request_id = models.CharField(max_length=30) # id de la transaction
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     contenu = models.ForeignKey(Capsule, on_delete=models.CASCADE)
     status = models.IntegerField(default=0)
 

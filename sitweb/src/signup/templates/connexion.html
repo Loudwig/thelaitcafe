@@ -80,7 +80,14 @@ button:hover {
     color: black;
     display: block;
     margin-top: 10px;
-}    
+}   
+.error-message {
+    font-size: small;
+    color :rgb(190, 15, 6) ; 
+    font-weight :bold;
+    text-align: center;
+    width : 100% ;
+} 
 </style>
 <!-- END-CSS CONNEXION-->
 
@@ -97,7 +104,17 @@ button:hover {
         {% endfor %}
         
         <button name = "submit" type="submit">Submit</button>
-        <a href="{% url 'creation_compte' %}" class = "no_account">No account ? Signup here</a>
+        <a href="{% url 'creation_compte' %}" class = "no_account"><u>No account ? Signup here</u></a>
+        {% if form.errors %}
+            <div class="error-message">
+                <p>Login failed: Please correct the following issues</p>
+                
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                
+            </div>
+        {% endif %}
     </form>
 </div>
 <!-- HTML CONNEXION -->
