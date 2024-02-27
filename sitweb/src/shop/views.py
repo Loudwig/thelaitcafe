@@ -16,10 +16,12 @@ DEBUG = settings.DEBUG
 def shop(request):
     capsules_vertuo = Capsule.objects.filter(type_capsule='vertuo',stock__gt = 0)
     capsules_classique = Capsule.objects.filter(type_capsule='classique')
-
+    user_phone_number = request.user.phone_number
+    print(user_phone_number)
     context = {
         'capsules_vertuo': capsules_vertuo,
-        'capsules_classique': capsules_classique
+        'capsules_classique': capsules_classique,
+        'phone_number' : user_phone_number
     }
     
     return render(request, 'shop/index.html', context)
@@ -63,6 +65,7 @@ def order_capsule(request):
             return JsonResponse({'success': True, 'message': f'request to {url} SUCCEED', 'redirect' : redirect_url})
         else : 
             return JsonResponse({'success': False, 'message': f'request to {url} FAILED with status code {response.status_code}'})
+            # what if that failes
 
     else:
         allowed_methods = ['POST']

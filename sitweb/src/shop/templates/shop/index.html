@@ -103,7 +103,7 @@ button[class = "commander-btn"]:hover{
                 <p class="prix-capsules"> 0,{{ capsule.prix_en_centimes }}$ </p>
             </div>
 
-            <button class="commander-btn" onclick="commander('{{ capsule.nom }}', '{{ capsule.prix_en_centimes }}')">Commander</button>
+            <button class="commander-btn" onclick="commander('{{ capsule.nom }}', '{{ capsule.prix_en_centimes }}','{{phone_number}}')">Commander</button>
         </div>
     {% endfor %}
 </div>
@@ -130,7 +130,7 @@ button[class = "commander-btn"]:hover{
                 <p class="prix-capsules"> 0,{{ capsule.prix_en_centimes }}$ </p>
             </div>
             
-            <button class="commander-btn" onclick="commander('{{ capsule.nom }}', '{{ capsule.prix_en_centimes }}')">Commander</button>
+            <button class="commander-btn" onclick="commander('{{ capsule.nom }}', '{{ capsule.prix_en_centimes }}','{{phone_number}}')">Commander</button>
 
             <!-- Ajoutez d'autres détails si nécessaire -->
         </div>
@@ -141,7 +141,7 @@ button[class = "commander-btn"]:hover{
 
 <!-- SCRIPT JS COMMANDER CAPSULE -->
 <script>
-    function commander(capsuleNom, capsulePrix) {
+    function commander(capsuleNom, capsulePrix,phone_number) {
         // Get the CSRF token from the cookie
         function getCookie(name) {
             var cookieValue = null;
