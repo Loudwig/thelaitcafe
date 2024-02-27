@@ -155,5 +155,5 @@ LOGOUT_REDIRECT_URL = 'connexion'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/var/www/thelaitcafe.com/media'
 
-
+AUTH_USER_MODEL = 'signup.CustomUser'
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
